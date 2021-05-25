@@ -11,14 +11,14 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */  
 
-        app = docker.build("IPIFormationDevops/nginx")
+        app = docker.build("ipiformation")
     }
 
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
-        docker.image('IPIFormationDevops/nginx').withRun('-p 80:80') { c ->
+        docker.image('ipiformation').withRun('-p 80:80') { c ->
         sh 'docker ps'
         sh 'curl localhost'
         sh 'echo "Tests passed"'
