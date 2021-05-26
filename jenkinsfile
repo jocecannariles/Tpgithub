@@ -18,7 +18,7 @@ node {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
-        docker.image('atos06/ipiformation').withRun('-p 80:80 --name devops') { c ->
+        docker.image('atos06/ipiformation').withRun('-p 80:80 --name devops3') { c ->
         sh 'docker ps'
         sh 'docker exec devops curl localhost:80'
         sh 'echo "Tests passed"'
