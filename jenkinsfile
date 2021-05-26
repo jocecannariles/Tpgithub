@@ -18,9 +18,9 @@ node {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
-        docker.image('ipiformation').withRun('-p 3333:9080') { c ->
+        docker.image('ipiformation').withRun('-p 3333:9080' --network host) { c ->
         sh 'docker ps'
-        sh 'curl jenkins:3333'
+        sh 'curl localhost:3333'
         sh 'echo "Tests passed"'
         }
     }
