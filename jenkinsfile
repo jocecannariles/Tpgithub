@@ -18,7 +18,7 @@ node {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
-        docker.image('ipiformation').withRun('-p 81:80') { c ->
+        docker.image('ipiformation').withRun('-p 81:81') { c ->
         sh 'docker ps'
         sh 'curl localhost:81'
         sh 'echo "Test passed"'
