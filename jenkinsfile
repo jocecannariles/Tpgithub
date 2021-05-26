@@ -20,8 +20,8 @@ node {
 
         docker.image('ipiformation').withRun('-p 3333:9080 --name devops') { c ->
         sh 'docker ps'
-        sh 'docker network ls'
-        sh 'docker exec devops curl jenkins:3333'
+        sh 'docker inspect ipiformation'
+        sh 'docker exec devops curl host:3333'
         sh 'echo "Tests passed"'
         }
     }
