@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.21.0-alpine
 
 RUN sed -i 's/nginx/IPIFormationDevops coucou2/g' /usr/share/nginx/html/index.html
 EXPOSE 80
