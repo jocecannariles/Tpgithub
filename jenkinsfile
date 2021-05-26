@@ -18,17 +18,10 @@ node {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
-        steps {
-            docker.image('ipiformation').withRun('-p 80:80 --name devops1') { c ->
-            sh 'docker ps'
-            sh 'docker exec devops curl localhost:80'
-            sh 'echo "Test 1 passed"'
-            }
-            docker.image('ipiformation').withRun('-p 80:80 --name devops2') { c ->
-            sh 'docker ps'
-            sh 'docker exec devops curl localhost:80'
-            sh 'echo "Test 2 passed"'
-            }
+        docker.image('ipiformation').withRun('-p 80:80 --name devops') { c ->
+        sh 'docker ps'
+        sh 'docker exec devops curl localhost:80'
+        sh 'echo "Tests passed"'
         }
     }
 
