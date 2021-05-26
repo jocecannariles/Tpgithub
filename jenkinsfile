@@ -28,6 +28,7 @@ node {
             sh 'docker ps'
             sh 'docker exec devops curl localhost:80'
             sh 'echo "Test 2 passed"'
+            }
         }
     }
 
