@@ -20,7 +20,7 @@ node {
 
         docker.image('ipiformation').withRun('-p 8080:9080 --name devops') { c ->
         sh 'docker ps'
-        sh 'docker exec devops ls'
+        sh 'docker exec devops curl localhost:8080'
         sh 'echo "Tests passed"'
         }
     }
