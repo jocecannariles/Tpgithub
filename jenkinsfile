@@ -11,14 +11,16 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */  
 
-        app = docker.build("ipiformation")
+        app = docker.build("ipiformation/test")
     }
 
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
-        docker.image('ipiformation').withRun('-p 80:80') { c ->
+        docker.image('ipiformation/test').withRun('-p 80:80') { c ->
+        sh 'docker ps'
+        sh 'curl localhost'
         sh 'echo "Tests passed"'
         }
     }
@@ -28,7 +30,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+        docker.withRegistry('https://hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
