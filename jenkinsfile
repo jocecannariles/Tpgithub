@@ -20,7 +20,7 @@ node {
 
         docker.image('ipiformation').withRun('-p 8080:9080') { c ->
         sh 'docker ps'
-        sh 'docker exec ${c.id} sh 'curl localhost:8080''
+        sh 'docker exec ${c.id} ls'
         sh 'echo "Tests passed"'
         }
     }
