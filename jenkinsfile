@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    def app
 
     stages {
         stage('Clone repository') {
@@ -13,7 +12,7 @@ pipeline {
         stage('Build image') {
             steps {
                 echo 'Construction  de l image'
-                app = docker.build("atos06/ipiformation")
+                docker.build("atos06/ipiformation")
             }
         }
 
@@ -42,6 +41,7 @@ pipeline {
 
         stage('Push image') {
             echo 'Push dans le repository Github'
+
             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                 app.push("${env.BUILD_NUMBER}")
                 app.push("1.0")
