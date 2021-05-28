@@ -15,13 +15,24 @@ node {
     }
 
     stage('Test image') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
+        parallel {
 
-        docker.image('atos06/ipiformation').withRun('-p 80:80 --name devops') { c ->
-        sh 'docker ps'
-        sh 'docker exec devops curl localhost:80'
-        sh 'echo "Tests passed"'
+            stage('Test 1') {
+                /* Ideally, we would run a test framework against our image.
+                 * For this example, we're using a Volkswagen-type approach ;-) */
+
+                docker.image('atos06/ipiformation').withRun('-p 80:80 --name devops') { c ->
+                sh 'docker ps'
+                sh 'docker exec devops curl localhost:80'
+                sh 'echo "Test 1 passed"'
+                }
+            }
+ 
+            stage('Test 2') {
+                /* Ideally, we would run a test framework against our image.
+                 * For this example, we're using a Volkswagen-type approach ;-) */
+                sh 'echo "Test 2 passed"'
+            }
         }
     }
 
