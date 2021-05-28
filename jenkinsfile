@@ -1,7 +1,8 @@
 pipeline {
     agent any
+    def app
     stages {
-        stage('Clone repository2') {
+        stage('Clone repository') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-credentials', url: 'https://github.com/fpicot31/Jenkins-docker.git']]])
              }
