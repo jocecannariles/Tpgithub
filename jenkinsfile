@@ -1,32 +1,19 @@
 pipeline {
     agent none
     stages {
-        stage('Run Tests') {
+     stage('Clone repository') {
+        checkout scm
+     }
+     stage('Run Tests') {
             parallel {
                 stage('Test On Windows') {
-                    agent {
-                        label "windows"
-                    }
                     steps {
-                        bat "run-tests.bat"
-                    }
-                    post {
-                        always {
-                            junit "**/TEST-*.xml"
-                        }
+                        echo "run-tests.bat"
                     }
                 }
                 stage('Test On Linux') {
-                    agent {
-                        label "linux"
-                    }
                     steps {
-                        sh "run-tests.sh"
-                    }
-                    post {
-                        always {
-                            junit "**/TEST-*.xml"
-                        }
+                        echo "run-tests.sh"
                     }
                 }
             }
