@@ -1,10 +1,7 @@
 pipeline {
     agent none
     stages {
-     stage('Clone repository') {
-        checkout scm
-     }
-     stage('Run Tests') {
+        stage('Run Tests') {
             parallel {
                 stage('Test On Windows') {
                     steps {
