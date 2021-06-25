@@ -1,6 +1,6 @@
 cd Jenkins-docker
 
--- creation du repository distant 2
+-- creation du repository distant de test
 git init
 git add .
 git commit -m "init depot"
