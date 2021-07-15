@@ -11,7 +11,8 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */  
 
-        app = docker.build("atos06/ipiformation")
+        /usr/bin/bash 'docker ps'
+        /* app = docker.build("atos06/ipiformation") */
     }
 
     stage('Test image') {
