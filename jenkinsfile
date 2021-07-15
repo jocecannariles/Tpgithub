@@ -12,7 +12,7 @@ node {
          * docker build on the command line */  
 
         echo  "test 1111111111"
-        sh 'docker ps'
+        bash 'docker ps'
         /* app = docker.build("atos06/ipiformation") */
     }
 
