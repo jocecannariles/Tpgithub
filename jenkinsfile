@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */  
          echo "ok11111"
-         sh 'docker ps'
+         sh 'echo "Tests passed bbbb"'
          echo "ok2222"
          
         /* app = docker.build("atos06/ipiformation") */
