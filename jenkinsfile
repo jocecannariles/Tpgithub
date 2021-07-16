@@ -10,8 +10,11 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */  
+         echo "ok11111"
+         sh 'docker ps'
+         echo "ok2222"
          
-        app = docker.build("atos06/ipiformation")
+        /* app = docker.build("atos06/ipiformation") */
     }
 
     stage('Test image') {
