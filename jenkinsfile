@@ -32,7 +32,8 @@ pipeline {
            steps {
                sh 'echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKERHUB_CREDENTIALS --password-stdin'
            }
-           
+       }
+       
        stage('Livraison sur le docker hub') {
            steps {
                sh 'docker push atos06/ipiformation:1.0'
