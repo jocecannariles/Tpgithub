@@ -1,15 +1,15 @@
 node {
     def app
 
-    stage('Nom de l'étape : ') {
+    stage('Clone du repository') {
         checkout scm
     }
 
-    stage('Nom de l'étape :') {
+    stage('Build') {
         app = docker.build("atos06/ipiformation")
     }
 
-    stage('Nom de l'étape') {
+    stage('Test') {
         docker.image('atos06/ipiformation').withRun('--rm -p 80:80 --name devops') { c ->
         sh 'docker ps'
         sh 'docker exec devops curl localhost:80'
@@ -17,7 +17,7 @@ node {
         }
     }
 
-    stage('Nom de l'étape : ') {
+    stage('Livraison sur le docker hub') {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("1.0")
