@@ -1,10 +1,11 @@
 pipeline {
-    agent any 1
+    agent any
     
-    stages {
-
-        def app
+    environnement {
+        DOCKERHUB_CREDENTIALS=credientials('docker-hub-credentials')
+    }
         
+    stages {
         stage('Clone du repository') {
             steps {
                 checkout scm
@@ -13,26 +14,28 @@ pipeline {
 
         stage('Build') {
             steps {
-                app = docker.build("atos06/ipiformation")
+                sh 'docker build -t atos06/ipiformation .'
             }
         }
 
         stage('Test') {
             steps {
-                docker.image('atos06/ipiformation').withRun('--rm -p 80:80 --name devops') { c ->
-                    sh 'docker ps'
-                    sh 'docker exec devops curl localhost:80'
-                    sh 'echo "Tests passed"'        
+                sh 'docker run --name devops -p 80:80 atos06/ipiformation'
+                sh 'docker ps'
+                sh 'docker exec devops curl localhost:80'
+                sh 'echo "Tests passed"'        
                }
             }
         }
 
+       stage ('login') {
+           steps {
+               sh 'echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKERHUB_CREDENTIALS --password-stdin'
+           }
+           
        stage('Livraison sur le docker hub') {
            steps {
-               docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                   app.push("${env.BUILD_NUMBER}")
-                   app.push("1.0")
-               }
+               sh 'docker push atos06/ipiformation:1.0'
            }
        }
     }
