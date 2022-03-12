@@ -9,21 +9,22 @@ node {
         app = docker.build("atos06/ipiformation")
     }
 
-    stage('Test') {
-        steps {
-            parallel ( 
-                "Test 1" : {
-                    docker.image('atos06/ipiformation').withRun('--rm -p 80:80 --name devops') { c ->
-                        sh 'docker ps'
-                        sh 'docker exec devops curl localhost:80'
-                        sh 'echo "Tests passed"'        
-                   }
-                },
-                "Test 2" : {
-                    echo "Test 2 terminé"
-                }
-            )
-        }
+    stages {
+       stage('Tests en paralleles') {
+           parallel { 
+               stage("Test 1") {
+                   docker.image('atos06/ipiformation').withRun('--rm -p 80:80 --name devops') { c ->
+                       sh 'docker ps'
+                       sh 'docker exec devops curl localhost:80'
+                       sh 'echo "Tests passed"'        
+                  }
+               }
+               
+               stage("Test 2") {
+                   echo "Test 2 terminé"
+               }
+           }
+       }
     }
 
     stage('Livraison sur le docker hub') {
