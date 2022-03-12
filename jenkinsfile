@@ -12,11 +12,5 @@ pipeline{
                 checkout scm
             }
         }
-
-        stage('Build') {
-            steps {
-                sh 'docker build -t atos06/ipiformation .'
-            }
-        }
     }
 }
