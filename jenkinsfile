@@ -18,26 +18,5 @@ pipeline{
                 sh 'docker build -t atos06/ipiformation .'
             }
         }
-
-        stage('Test') {
-            steps {
-                sh 'docker run --name devops -p 80:80 atos06/ipiformation'
-                sh 'docker ps'
-                sh 'docker exec devops curl localhost:80'        
-               }
-            }
-        }
-
-       stage('login') {
-           steps {
-               sh 'echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKERHUB_CREDENTIALS --password-stdin'
-           }
-       }
-       
-       stage('Livraison sur le docker hub') {
-           steps {
-               sh 'docker push atos06/ipiformation:1.0'
-           }
-       }
     }
 }
